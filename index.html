@@ -1,0 +1,26 @@
+
+<!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8"><title>Cond. Village São José - Sorteio</title>
+<style>
+body{font-family:Arial;background:#0b3d91;color:#fff;text-align:center;padding:25px}
+.card{max-width:820px;margin:auto;background:#174ea6;padding:25px;border-radius:12px}
+#timer{font-size:58px;font-weight:bold;margin:20px}
+.rules{text-align:left;background:#0f4fb5;padding:15px;border-radius:8px}
+</style></head><body><div class="card">
+<h1>Cond. Village São José</h1>
+<h3>Sorteio das Vagas de Motocicleta</h3>
+<p><b>Data:</b> 29/07/2026 &nbsp;&nbsp; <b>Horário:</b> 19:00</p>
+<div class="rules">
+<b>Regras do Sorteio</b>
+<ol>
+<li>Participantes: Apartamento 13 (interesse em 2 vagas) e Apartamento 43 (interesse em 1 vaga).</li>
+<li>A primeira vaga será sorteada entre os dois apartamentos, com chances iguais.</li>
+<li>Se o Apartamento 43 ganhar a primeira vaga, a segunda vaga será destinada automaticamente ao Apartamento 13.</li>
+<li>Se o Apartamento 13 ganhar a primeira vaga, será realizado um novo sorteio entre os apartamentos 13 e 43 para definir a segunda vaga.</li>
+</ol></div>
+<div id="timer"></div><div id="result"></div></div>
+<script>
+let done=false;function target(){let n=new Date();return new Date(n.getFullYear(),n.getMonth(),n.getDate(),19,0,0);}
+function draw(){if(done)return;done=true;let f=Math.random()<.5?"Apartamento 13":"Apartamento 43";let h="<h2>1ª vaga: "+f+"</h2>";if(f==="Apartamento 43")h+="<h2>2ª vaga: Apartamento 13 (automática)</h2>";else{let s=Math.random()<.5?"Apartamento 13":"Apartamento 43";h+="<h2>2ª vaga: "+s+"</h2>";}h+="<p><b>Resultado registrado em:</b> "+new Date().toLocaleString("pt-BR")+"</p>";result.innerHTML=h;}
+function tick(){if(done)return;let d=target()-new Date();if(d<=0){timer.textContent="00:00:00";draw();return;}let h=Math.floor(d/36e5),m=Math.floor(d%36e5/6e4),s=Math.floor(d%6e4/1e3);timer.textContent=[h,m,s].map(x=>String(x).padStart(2,"0")).join(":");}
+setInterval(tick,1000);tick();
+</script></body></html>
